@@ -15,6 +15,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import NotFound from "./pages/not-found";
+import BookDetails from "./pages/dashboard/book-detail";
 
 // Simulate a delay function that returns a promise
 const delay = (ms) =>
@@ -90,6 +91,7 @@ function App() {
       children: [
         { index: true, element: <Dashboard /> },
         { path: "/dashboard/projects", element: <Projects /> },
+        { path: "/dashboard/books/:id", element: <BookDetails /> },
         { path: "/dashboard/tasks", element: <Tasks /> },
         { path: "/dashboard/team", element: <Services /> },
         { path: "/dashboard/notifications", element: <Notifications /> },
