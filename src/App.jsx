@@ -1,5 +1,5 @@
 import "./App.css";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Link, RouterProvider } from "react-router-dom";
 import DashboardLayout from "./layouts/DashboardLayout";
 import Dashboard from "./pages/dashboard";
 import Projects from "./pages/dashboard/projects";
@@ -101,6 +101,7 @@ function App() {
   ]);
   return (
     <>
+    <Link to='/dashboard'>Dashboard</Link>
       <button onClick={notify}>Make me a toast</button>
       <Toaster />
       <RouterProvider router={router} />
