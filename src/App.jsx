@@ -2,10 +2,6 @@ import "./App.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import DashboardLayout from "./layouts/DashboardLayout";
 import Dashboard from "./pages/dashboard";
-import Projects from "./pages/dashboard/projects";
-import Tasks from "./pages/dashboard/tasks";
-import Services from "./pages/dashboard/services";
-import Notifications from "./pages/dashboard/notifications";
 import Register from "./pages/auth/register";
 import RootLayout from "./layouts/RootLayout";
 import ForgotPassword from "./pages/auth/forgot-password";
@@ -16,6 +12,8 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import NotFound from "./pages/not-found";
 import BookDetails from "./pages/dashboard/book-detail";
+import Books from "./pages/dashboard/books";
+import Members from "./pages/dashboard/members";
 
 // Simulate a delay function that returns a promise
 const delay = (ms) =>
@@ -90,18 +88,15 @@ function App() {
       ),
       children: [
         { index: true, element: <Dashboard /> },
-        { path: "/dashboard/projects", element: <Projects /> },
+        { path: "/dashboard/books", element: <Books /> },
         { path: "/dashboard/books/:id", element: <BookDetails /> },
-        { path: "/dashboard/tasks", element: <Tasks /> },
-        { path: "/dashboard/team", element: <Services /> },
-        { path: "/dashboard/notifications", element: <Notifications /> },
+        { path: "/dashboard/members", element: <Members /> },
       ],
     },
     { path: "*", element: <NotFound /> },
   ]);
   return (
     <>
-    
       <button onClick={notify}>Make me a toast</button>
       <Toaster />
       <RouterProvider router={router} />
