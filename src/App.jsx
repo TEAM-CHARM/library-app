@@ -101,6 +101,7 @@ function App() {
   ]);
   return (
     <>
+      <button onClick={notify}>Make me a toast</button>
       <Toaster />
       <RouterProvider router={router} />
     </>
