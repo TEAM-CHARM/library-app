@@ -1,6 +1,6 @@
 import CTA from "./sections/CTA";
 import Features from "./sections/Features";
-import Footer from "./sections/Footer";
+// import Footer from "./sections/Footer";
 import Hero from "./sections/Hero";
 import Navbar from "./sections/Navbar";
 import Pricing from "./sections/Pricing";
@@ -22,7 +22,7 @@ const Landing = () => {
       {/* ----Call to action section--- */}
       <CTA />
       {/* ----footer--- */}
-      <Footer /> 
+      {/* <Footer />  */}
     </div>
   );
 };
