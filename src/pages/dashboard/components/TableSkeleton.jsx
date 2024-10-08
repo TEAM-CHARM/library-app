@@ -16,7 +16,7 @@ const TableSkeleton = () => {
         </tr>
       </thead>
       <tbody>
-        {rows?.map((row, index) => {
+        {rows.map((row, index) => {
           return (
             <tr key={index} className="animate-pulse">
               <td className="border px-4 py-2">

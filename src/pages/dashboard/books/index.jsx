@@ -110,7 +110,7 @@ const Books = () => {
         )
       ) : (
         <div className="grid grid-cols-4 gap-10">
-          {books?.map((book, index) => {
+          {books && books.length && books.map((book, index) => {
             return (
               <Link key={index} to={book.isbn}>
                 <BookCard book={book} />
