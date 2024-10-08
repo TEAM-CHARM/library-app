@@ -7,11 +7,23 @@ export default {
         heading: ["Poppins", "sans-serif"],
         body: ["Ubuntu", "sans-serif"],
       },
-      colors:{
-        primary:{
-          main:"#C1C1C1",
-        }
-      }
+      colors: {
+        primary: {
+          main: "#00b9be",
+          dark: "#0f8689",
+          light: "#18d1d6",
+        },
+        secondary: {
+          main: "red",
+          light: "",
+          dark: "",
+        },
+        background: {
+          main: "#E3E3E3",
+          light: "#F2F1ED",
+          dark: "",
+        },
+      },
     },
   },
   plugins: [],
