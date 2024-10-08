@@ -1,7 +1,7 @@
 import React from "react";
 import "../dashboard.css";
 
-const rows = [1, 2, 3, 4, 5, ];
+const rows = [1, 2, 3, 4, 5,6 ];
 const TableSkeleton = () => {
   return (
     <table className="min-w-full bg-white border-2 border-primary-light rounded-xl shadow-lg overflow-hidden">
