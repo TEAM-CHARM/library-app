@@ -35,7 +35,7 @@ const BooksTable = ({ books, handleDeleteBook, handleEditBook }) => {
             <th className="p-4 font-semibold">ISBN</th>
             <th className="p-4 font-semibold">Title</th>
             <th className="p-4 font-semibold">Author</th>
-            <th className="p-4 font-semibold">Category</th>
+            <th className="p-4 font-semibold">Genre</th>
             <th className="p-4 font-semibold">Year</th>
             <th className="p-4 font-semibold">Action</th>
           </tr>
@@ -43,7 +43,7 @@ const BooksTable = ({ books, handleDeleteBook, handleEditBook }) => {
         <tbody>
           {currentBooks.map((book, index) => (
             <tr
-              key={book.isbn}
+              key={index}
               className={`border-t ${
                 index % 2 === 0 ? "bg-white" : "bg-gray-50"
               }`}
@@ -65,7 +65,7 @@ const BooksTable = ({ books, handleDeleteBook, handleEditBook }) => {
               </td>
               <td>
                 <Link to={`/dashboard/books/${book.isbn}`} className="p-4">
-                  {book.category}
+                  {book.genre}
                 </Link>
               </td>
               <td>

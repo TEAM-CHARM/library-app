@@ -8,30 +8,34 @@ import toast from "react-hot-toast";
 import BookCard from "./components/BookCard";
 import { IoGridOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
+import { apiGetBooks } from "../../../services/book";
+import TableSkeleton from "../components/TableSkeleton";
 
 const Books = () => {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [view, setView] = useState("grid");
+  const [view, setView] = useState("list");
 
-  // const Books = async () => {
-  //   try {
-  //     setLoading(true)
-  //     const res = await getStats()
-  //     if(res.stauts===200){
-  //       setBooks(res.data)
-  //     }
-  //   } catch (error) {
-  //     toast.error("Error fetching books")
-  //     console.log(error)
-  //   }finally{
-  //     setLoading(false)
-  //   }
-  // }
+  const fetchBooks = async () => {
+    try {
+      setLoading(true);
+      const res = await apiGetBooks();
+      console.log(res);
+      if (res.status === 200) {
+        console.log("Books--->", res.data);
+        setBooks(res.data);
+      }
+    } catch (error) {
+      toast.error("Error fetching books");
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    // fetchBooks()
-    setBooks(K.BOOKS);
+    fetchBooks();
+    // setBooks(K.BOOKS);
   }, []);
 
   const handleBookAdd = async () => {
@@ -95,11 +99,15 @@ const Books = () => {
       </div>
 
       {view === "list" ? (
-        <BooksTable
-          books={books}
-          handleDeleteBook={handleDeleteBook}
-          handleEditBook={handleEditBook}
-        />
+        loading ? (
+          <TableSkeleton />
+        ) : (
+          <BooksTable
+            books={books}
+            handleDeleteBook={handleDeleteBook}
+            handleEditBook={handleEditBook}
+          />
+        )
       ) : (
         <div className="grid grid-cols-4 gap-10">
           {books?.map((book, index) => {
