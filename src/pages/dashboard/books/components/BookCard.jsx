@@ -5,7 +5,7 @@ const BookCard = ({ book }) => {
   return (
     <div className="w-64 h-80 bg-white shadow-lg rounded-lg overflow-hidden transform transition-all hover:scale-105">
       <img
-        src={book.image}
+        src={book.imageLink}
         alt={book.title}
         className="w-full h-48 object-cover"
       />

@@ -1,3 +1,7 @@
+*{
+        scroll-behavior: smooth;
+}
+
 .hero-container{
     
         background-image: url('../../assets/images/librarium_bg.webp');

@@ -1,10 +1,10 @@
 import axios from "axios";
 
-const apiBaseUrl = import.meta.env.VITE_BASE_URL;
+const apiBaseUrl = import.meta.env.VITE_BASE_URL2;
 
 export const apiClient = axios.create({
   baseURL: apiBaseUrl,
-  withCredentials: true,
+  // withCredentials: true,
 });
 
 // Add a request interceptor

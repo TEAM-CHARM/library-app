@@ -15,8 +15,9 @@ export default {
         },
         secondary: {
           main: "red",
-          light: "",
+          light: "#00B9BE",
           dark: "",
+
         },
         background: {
           main: "#E3E3E3",
