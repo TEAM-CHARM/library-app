@@ -53,6 +53,43 @@ const K = {
       percentage: -10,
     },
   ],
+  AUTHORS: [
+    {
+      id: "01",
+      name: "Ann",
+      bio: "I am a writer",
+    },
+    {
+      id:"015",
+      name:"Napoleon Hill",
+      bio:"A writer"
+    },
+    {
+      id:"016",
+      name:"Robert Kiosaki",
+      bio:"A writer"
+    },
+    {
+      id: "02",
+      name: "Ann",
+      bio: "I am a writer",
+    },
+    {
+      id: "03",
+      name: "Ann",
+      bio: "I am a writer",
+    },
+    {
+      id: "04",
+      name: "Ann",
+      bio: "I am a writer",
+    },
+    {
+      id: "05",
+      name: "Ann",
+      bio: "I am a writer",
+    },
+  ],
 
   BOOKS: [
     {

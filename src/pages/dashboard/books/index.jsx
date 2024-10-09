@@ -8,13 +8,19 @@ import toast from "react-hot-toast";
 import BookCard from "./components/BookCard";
 import { IoGridOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
-import { apiGetBooks } from "../../../services/book";
+import { apiDeleteBook, apiGetBooks } from "../../../services/book";
 import TableSkeleton from "../components/TableSkeleton";
+import AddOrEditBook from "../../../modals/add-book";
+import { apiGetAuthors } from "../../../services/author";
 
 const Books = () => {
   const [books, setBooks] = useState([]);
+  const [authors, setAuthors] = useState([]);
   const [loading, setLoading] = useState(false);
   const [view, setView] = useState("list");
+  const [openAddBook, setOpenAddBook] = useState(false);
+  const [selectedBook, setSelectedBook] = useState({});
+  const [bookChange, setBookChange] = useState(false);
 
   const fetchBooks = async () => {
     try {
@@ -32,14 +38,43 @@ const Books = () => {
       setLoading(false);
     }
   };
+  const fetchAuthors = async () => {
+    try {
+      setLoading(true);
+      const res = await apiGetAuthors();
+      console.log(res);
+      if (res.status === 200) {
+        console.log("Authors--->", res.data);
+        setAuthors(res.data);
+      }
+    } catch (error) {
+      toast.error("Error fetching authors");
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchData = () => {
+    fetchBooks();
+    fetchAuthors();
+  };
 
   useEffect(() => {
-    fetchBooks();
+    fetchData();
     // setBooks(K.BOOKS);
-  }, []);
+  }, [bookChange === true]);
 
-  const handleBookAdd = async () => {
-    console.log("Add book button clicked");
+  const handleAddOrEditBook = async (book) => {
+    try {
+      setLoading(true);
+      console.log("Book added", book);
+    } catch (error) {
+      console.log("Error adding book", error);
+      toast.error("Error adding book");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleEditBook = async (book) => {
@@ -56,7 +91,9 @@ const Books = () => {
   const handleDeleteBook = async (book) => {
     try {
       setLoading(true);
-      console.log("book deleted", book);
+      const res = await apiDeleteBook(book._id);
+      fetchData();
+      toast.success("Book deleted successfully");
     } catch (error) {
       toast.error("Error deleting book!");
       console.log(error);
@@ -72,7 +109,7 @@ const Books = () => {
         searchPlaceholder="Search books, authors, categories..."
         buttonText="Add Book"
         buttonIcon={<BiSolidBookAdd />}
-        onClick={handleBookAdd}
+        onClick={() => setOpenAddBook(true)}
       />
 
       <div className="flex justify-end align-middle items-center pr-10 mb-8">
@@ -105,7 +142,9 @@ const Books = () => {
           <BooksTable
             books={books}
             handleDeleteBook={handleDeleteBook}
-            handleEditBook={handleEditBook}
+            handleEditBook={handleAddOrEditBook}
+            setSelectedBook={setSelectedBook}
+            setOpenAddBook={setOpenAddBook}
           />
         )
       ) : (
@@ -119,6 +158,18 @@ const Books = () => {
           })}
         </div>
       )}
+
+      <AddOrEditBook
+        authors={authors && authors}
+        open={openAddBook}
+        book={selectedBook}
+        handleSubmit={handleAddOrEditBook}
+        closeModal={() => {
+          setSelectedBook({});
+          setOpenAddBook(false);
+        }}
+        setBookChange={setBookChange}
+      />
     </div>
   );
 };

@@ -3,7 +3,8 @@ import React, { useState } from "react";
 import { MdEdit, MdDelete } from "react-icons/md";
 import { Link } from "react-router-dom";
 
-const BooksTable = ({ books, handleDeleteBook, handleEditBook }) => {
+const BooksTable = ({  books, handleDeleteBook, handleEditBook, setSelectedBook, setOpenAddBook }) => {
+  // const [selectedBook ,setSelectedBook] = useState({})
   const [currentPage, setCurrentPage] = useState(1); // Current page number
   const booksPerPage = 10; // Books per page
 
@@ -49,34 +50,38 @@ const BooksTable = ({ books, handleDeleteBook, handleEditBook }) => {
               }`}
             >
               <td>
-                <Link to={`/dashboard/books/${book.isbn}`} className="p-4">
+                <Link to={`/dashboard/books/${book._id}`} className="p-4">
                   {book.isbn}
                 </Link>
               </td>
               <td>
-                <Link to={`/dashboard/books/${book.isbn}`} className="p-4">
+                <Link to={`/dashboard/books/${book._id}`} className="p-4">
                   {book.title}
                 </Link>
               </td>
               <td>
-                <Link to={`/dashboard/books/${book.isbn}`} className="p-4">
+                <Link to={`/dashboard/books/${book._id}`} className="p-4">
                   {book.author}
                 </Link>
               </td>
               <td>
-                <Link to={`/dashboard/books/${book.isbn}`} className="p-4">
+                <Link to={`/dashboard/books/${book._id}`} className="p-4">
                   {book.genre}
                 </Link>
               </td>
               <td>
-                <Link to={`/dashboard/books/${book.isbn}`} className="p-4">
+                <Link to={`/dashboard/books/${book._id}`} className="p-4">
                   {book.year}
                 </Link>
               </td>
               <td className="p-4 flex align-middle items-center gap-6">
                 <button
                   className="text-blue-500 hover:underline"
-                  onClick={() => handleEditBook(book)}
+                  onClick={() => {
+                    setSelectedBook(book)
+                    console.log("selected book -", book);
+                    setOpenAddBook(true)
+                  } }
                 >
                   <MdEdit size={25} />
                 </button>
