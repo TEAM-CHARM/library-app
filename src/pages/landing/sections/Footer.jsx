@@ -7,7 +7,7 @@ import { FaMailBulk } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-700 text-white">
+    <footer id='contact-section' className="bg-gray-700 text-white">
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
@@ -46,7 +46,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <div className="mt-8 pt-8 border-t border-green-700 text-center">
+        <div className="mt-8 pt-8 border-t border-secondary-light text-center">
           <p>&copy; 2024 Library Management App. All rights reserved.</p>
         </div>
       </div>

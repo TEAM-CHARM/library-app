@@ -12,31 +12,31 @@ const FeatureCard = ({ icon, title, description }) => (
 const Features = () => {
   const features = [
     {
-      icon: <FaBook className="text-4xl text-green-600" />,
+      icon: <FaBook className="text-4xl text-secondary-light" />,
       title: "Catalog Management",
       description: "Easily organize and track your entire library collection."
     },
     {
-      icon: <FaUsers className="text-4xl text-green-600" />,
+      icon: <FaUsers className="text-4xl text-secondary-light" />,
       title: "Patron Management",
       description: "Efficiently manage member records and borrowing history."
     },
     {
-      icon: <FaChartBar className="text-4xl text-green-600" />,
+      icon: <FaChartBar className="text-4xl text-secondary-light" />,
       title: "Analytics Dashboard",
       description: "Gain insights with powerful reporting and analytics tools."
     },
     {
-      icon: <FaCloudUploadAlt className="text-4xl text-green-600" />,
+      icon: <FaCloudUploadAlt className="text-4xl text-secondary-light" />,
       title: "Cloud-Based Solution",
       description: "Access your library system securely from anywhere, anytime."
     }
   ];
 
   return (
-    <section className="bg-gray-100 py-16">
+    <section id='feature-section' className="bg-gray-100 py-16">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-12">Our Features</h2>
+        <h2 className="text-3xl font-bold text-secondary-light text-center mb-12">Our Features</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {features.map((feature, index) => (
             <FeatureCard key={index} {...feature} />
