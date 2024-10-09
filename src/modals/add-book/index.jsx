@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useEffect, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react"; // Modal library for transitions
 import { Fragment } from "react";
@@ -6,14 +7,7 @@ import toast from "react-hot-toast";
 
 const inputStyle = "w-full px-4 py-2 border border-primary-light rounded-full";
 
-const AddOrEditBook = ({
-  authors,
-  open,
-  book,
-  handleSubmit,
-  closeModal,
-  setBookChange,
-}) => {
+const AddOrEditBook = ({ authors, open, book, closeModal, setBookChange }) => {
   const [formData, setFormData] = useState({
     title: book?.title || "",
     isbn: book?.isbn || "",
@@ -77,9 +71,9 @@ const AddOrEditBook = ({
       }
     } catch (error) {
       console.log("Error adding book", error);
-      toast.error(`${
-            book?._id ? "Error updating book" : "Error editing book"
-          }`);
+      toast.error(
+        `${book?._id ? "Error updating book" : "Error editing book"}`
+      );
     } finally {
       setLoading(false);
     }

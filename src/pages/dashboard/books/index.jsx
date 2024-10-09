@@ -106,7 +106,7 @@ const Books = () => {
     <div>
       <PageHeader
         title="Books"
-        searchPlaceholder="Search books, authors, categories..."
+        searchPlaceholder="Search books, authors, genre..."
         buttonText="Add Book"
         buttonIcon={<BiSolidBookAdd />}
         onClick={() => setOpenAddBook(true)}
@@ -148,12 +148,14 @@ const Books = () => {
           />
         )
       ) : (
-        <div className="grid grid-cols-4 gap-10">
+        <div className="grid grid-cols-4 gap-10 px-16">
           {books?.map((book, index) => {
             return (
-              <Link key={index} to={book.isbn}>
-                <BookCard book={book} />
-              </Link>
+              <div key={index}>
+                <Link to={book._id}>
+                  <BookCard book={book} />
+                </Link>
+              </div>
             );
           })}
         </div>
