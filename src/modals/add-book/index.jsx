@@ -17,9 +17,9 @@ const AddOrEditBook = ({ authors, open, book, closeModal, fetchData }) => {
     imageLink: book?.imageLink || "",
     language: book?.language || "",
     pages: book?.pages || "",
-    pdflink: book?.pdflink || "",
+    pdfLink: book?.pdfLink || "",
     publisher: book?.publisher || "",
-    subtitle: book?.subtitle || "",
+    subTitle: book?.subTitle || "",
     year: book?.year || "",
     copies: book?.copies || "",
   });
@@ -36,7 +36,7 @@ const AddOrEditBook = ({ authors, open, book, closeModal, fetchData }) => {
       let res;
       if (book?._id) {
         // Editing the book, so we use the update API
-        const {_id, __v, ...rest} = bookInfo 
+        const { _id, __v, ...rest } = bookInfo;
         res = await apiUpdateBook(book._id, rest);
       } else {
         // Adding a new book
@@ -52,8 +52,8 @@ const AddOrEditBook = ({ authors, open, book, closeModal, fetchData }) => {
             book?._id ? "Book updated successfully" : "Book added successfully"
           }`
         );
-        fetchData()
-        
+        fetchData();
+
         setFormData({
           title: "",
           isbn: "",
@@ -63,14 +63,13 @@ const AddOrEditBook = ({ authors, open, book, closeModal, fetchData }) => {
           imageLink: "",
           language: "",
           pages: "",
-          pdflink: "",
+          pdfLink: "",
           publisher: "",
-          subtitle: "",
+          subTitle: "",
           year: "",
           copies: "",
         });
         closeModal();
-        
       }
     } catch (error) {
       console.log("Error adding book", error);
@@ -264,8 +263,8 @@ const AddOrEditBook = ({ authors, open, book, closeModal, fetchData }) => {
                       </label>
                       <input
                         type="url"
-                        name="pdflink"
-                        value={formData.pdflink}
+                        name="pdfLink"
+                        value={formData.pdfLink}
                         onChange={handleChange}
                         className={`${inputStyle}`}
                         disabled={loading}
@@ -295,8 +294,8 @@ const AddOrEditBook = ({ authors, open, book, closeModal, fetchData }) => {
                     </label>
                     <input
                       type="text"
-                      name="subtitle"
-                      value={formData.subtitle}
+                      name="subTitle"
+                      value={formData.subTitle}
                       onChange={handleChange}
                       className={`${inputStyle}`}
                       disabled={loading}
