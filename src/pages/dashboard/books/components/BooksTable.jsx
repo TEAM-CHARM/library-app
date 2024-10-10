@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { MdEdit, MdDelete } from "react-icons/md";
 import { Link } from "react-router-dom";
+import ConfirmDelete from "../../../../modals/confirm-delete";
 
 const BooksTable = ({  books, handleDeleteBook, handleEditBook, setSelectedBook, setOpenAddBook }) => {
   // const [selectedBook ,setSelectedBook] = useState({})
@@ -87,7 +88,8 @@ const BooksTable = ({  books, handleDeleteBook, handleEditBook, setSelectedBook,
                 </button>
                 <button
                   className="text-red-500 hover:underline"
-                  onClick={() => handleDeleteBook(book)}
+                  onClick={() => {
+                    if(window.confirm(`Are you sure you want to delete this book(${book.title})`))handleDeleteBook(book)}}
                 >
                   <MdDelete size={25} />
                 </button>
@@ -117,6 +119,7 @@ const BooksTable = ({  books, handleDeleteBook, handleEditBook, setSelectedBook,
           Next
         </button>
       </div>
+      {/* <ConfirmDelete book={} /> */}
     </div>
   );
 };

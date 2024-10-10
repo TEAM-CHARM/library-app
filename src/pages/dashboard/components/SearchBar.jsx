@@ -1,12 +1,13 @@
 import React from "react";
 
-const SearchBar = ({ placeholder }) => {
+const SearchBar = ({ placeholder, onChange }) => {
   return (
     <div className="relative max-w-lg w-full">
       <input
         type="text"
         className="w-full h-12 px-5 pr-16 rounded-full border-2 border-primary-light focus:border-primary-dark focus:ring focus:ring-background-light shadow-sm text-md placeholder-gray-400 focus:outline-none"
         placeholder={placeholder}
+        onChange={onChange}
       />
       <button className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-blue-500 focus:outline-none">
         <svg

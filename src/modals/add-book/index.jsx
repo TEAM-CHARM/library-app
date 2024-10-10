@@ -36,7 +36,8 @@ const AddOrEditBook = ({ authors, open, book, closeModal, fetchData }) => {
       let res;
       if (book?._id) {
         // Editing the book, so we use the update API
-        res = await apiUpdateBook(book._id, bookInfo);
+        const {_id, __v, ...rest} = bookInfo 
+        res = await apiUpdateBook(book._id, rest);
       } else {
         // Adding a new book
         res = await apiAddBook(bookInfo);

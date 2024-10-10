@@ -49,13 +49,13 @@ const BookDetails = () => {
     }
   };
 
-  const fetchData =()=>{
+  const fetchData = () => {
     fetchBook();
     fetchAuthors();
-  }
+  };
 
   useEffect(() => {
-    fetchData()
+    fetchData();
   }, [id]);
 
   return (
@@ -90,9 +90,11 @@ const BookDetails = () => {
               <h2 className="text-3xl font-bold text-gray-800">{book.title}</h2>
               <p className="text-gray-600 italic">{book.subTitle}</p>
               <h4 className="text-xl font-semibold text-gray-700 mt-2">
-                Author: {book.author}
+                Author: {book.author?.name ? book.author.name : book.author}
               </h4>
-              <small className="text-yellow-500 text-lg">{`Rating: ${book.rating}`}</small>
+              {book.rating && (
+                <small className="text-yellow-500 text-lg">{`Rating: ${book.rating}`}</small>
+              )}
               <p className="text-gray-600">{book.description}</p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
