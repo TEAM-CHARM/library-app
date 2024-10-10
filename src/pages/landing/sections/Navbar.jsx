@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FaBook, FaBars, FaTimes } from 'react-icons/fa';
-import logo from '../../../assets/images/logo.png'
+import logo from '../../../assets/images/logo.png';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,35 +10,34 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-gray-700 text-white">
+    <nav className="bg-gray-700 fixed w-full z-50">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center py-4">
           <div className="flex items-center">
-           
             <img src={logo} className='mr-2 w-12' alt="Logo" />
-            <span className="font-bold  text-xl"> The Librarium</span>
+            <span className="font-bold text-xl text-white">The Librarium</span>
           </div>
           <div className="hidden md:flex space-x-4">
-            <a href="#home-section" className="hover:text-secondary-light">Home</a>
-            <a href="#feature-section" className="hover:text-secondary-light">Features</a>
-            <a href="#pricing-section" className="hover:text-secondary-light">Pricing</a>
-            <a href="#testimonial-section" className="hover:text-secondary-light">Testimonials</a>
-            <a href="#contact-section" className="hover:text-secondary-light">Contact</a>
+            <a href="#home-section" className="text-white hover:text-secondary-light">Home</a>
+            <a href="#feature-section" className="text-white hover:text-secondary-light">Features</a>
+            <a href="#pricing-section" className="text-white hover:text-secondary-light">Pricing</a>
+            <a href="#testimonial-section" className="text-white hover:text-secondary-light">Testimonials</a>
+            <a href="#contact-section" className="text-white hover:text-secondary-light">Contact</a>
           </div>
           <div className="md:hidden">
             <button onClick={toggleMenu}>
-              {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+              {isOpen ? <FaTimes size={24} className="text-white" /> : <FaBars size={24} className="text-white" />}
             </button>
           </div>
         </div>
       </div>
       {isOpen && (
-        <div className="md:hidden">
-          <a href="#" className="block py-2 px-4 hover:bg-green-700">Home</a>
-          <a href="#" className="block py-2 px-4 hover:bg-green-700">Features</a>
-          <a href="#" className="block py-2 px-4 hover:bg-green-700">Pricing</a>
-          <a href="#" className="block py-2 px-4 hover:bg-green-700">Resources</a>
-          <a href="#" className="block py-2 px-4 hover:bg-green-700">Contact</a>
+        <div className="md:hidden bg-gray-700">
+          <a href="#home-section" className="block py-2 px-4 text-white hover:text-secondary-light">Home</a>
+          <a href="#feature-section" className="block py-2 px-4 text-white hover:text-secondary-light">Features</a>
+          <a href="#pricing-section" className="block py-2 px-4 text-white hover:text-secondary-light">Pricing</a>
+          <a href="#resources-section" className="block py-2 px-4 text-white hover:text-secondary-light">Resources</a>
+          <a href="#contact-section" className="block py-2 px-4 text-white hover:text-secondary-light">Contact</a>
         </div>
       )}
     </nav>
