@@ -63,7 +63,7 @@ const Books = () => {
   useEffect(() => {
     fetchData();
     // setBooks(K.BOOKS);
-  }, [bookChange === true]);
+  }, []);
 
   const handleAddOrEditBook = async (book) => {
     try {
@@ -170,7 +170,7 @@ const Books = () => {
           setSelectedBook({});
           setOpenAddBook(false);
         }}
-        setBookChange={setBookChange}
+        fetchData={fetchData}
       />
     </div>
   );

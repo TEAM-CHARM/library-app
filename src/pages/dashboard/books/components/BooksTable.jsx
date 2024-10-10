@@ -61,7 +61,7 @@ const BooksTable = ({  books, handleDeleteBook, handleEditBook, setSelectedBook,
               </td>
               <td>
                 <Link to={`/dashboard/books/${book._id}`} className="p-4">
-                  {book.author}
+                  {book.author?.name ? book.author.name : book.author}
                 </Link>
               </td>
               <td>
