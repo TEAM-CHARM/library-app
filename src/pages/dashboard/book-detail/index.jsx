@@ -49,9 +49,13 @@ const BookDetails = () => {
     }
   };
 
-  useEffect(() => {
+  const fetchData =()=>{
     fetchBook();
     fetchAuthors();
+  }
+
+  useEffect(() => {
+    fetchData()
   }, [id]);
 
   return (
@@ -127,6 +131,7 @@ const BookDetails = () => {
           setOpenEditBook(false);
         }}
         setBookChange={setBookChange}
+        fetchData={fetchData}
       />
     </>
   );

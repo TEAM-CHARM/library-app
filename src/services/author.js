@@ -5,17 +5,17 @@ export const apiAddAuthor = async (payload) => {
 };
 
 export const apiGetAuthors = async () => {
-  return await apiClient.get("/author");
+  return await apiClient.get("/authors");
 };
 
 export const apiGetAuthor = async (id) => {
-  return await apiClient.get(`/author/${id}`);
+  return await apiClient.get(`/authors/${id}`);
 };
 
 export const apiUpdateAuthor = async (id, payload) =>{
-    return await apiClient.patch(`/author/${id}`, payload)
+    return await apiClient.patch(`/authors/${id}`, payload)
 }
 
 export const apiDeleteAuthor  = async (id) =>{
-    return await apiClient.delete(`/author/${id}`)
+    return await apiClient.delete(`/authors/${id}`)
 }

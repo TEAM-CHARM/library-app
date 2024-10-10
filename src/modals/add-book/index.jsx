@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 
 const inputStyle = "w-full px-4 py-2 border border-primary-light rounded-full";
 
-const AddOrEditBook = ({ authors, open, book, closeModal, setBookChange }) => {
+const AddOrEditBook = ({ authors, open, book, closeModal, fetchData }) => {
   const [formData, setFormData] = useState({
     title: book?.title || "",
     isbn: book?.isbn || "",
@@ -51,8 +51,8 @@ const AddOrEditBook = ({ authors, open, book, closeModal, setBookChange }) => {
             book?._id ? "Book updated successfully" : "Book added successfully"
           }`
         );
-        setBookChange(true);
-        closeModal();
+        fetchData()
+        
         setFormData({
           title: "",
           isbn: "",
@@ -68,6 +68,8 @@ const AddOrEditBook = ({ authors, open, book, closeModal, setBookChange }) => {
           year: "",
           copies: "",
         });
+        closeModal();
+        
       }
     } catch (error) {
       console.log("Error adding book", error);
@@ -87,7 +89,7 @@ const AddOrEditBook = ({ authors, open, book, closeModal, setBookChange }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     // validate fields and convert them to the right data types according to the schema
-
+    console.log("formdata->", formData);
     handleAddOrEditBook(formData);
   };
 
@@ -173,7 +175,7 @@ const AddOrEditBook = ({ authors, open, book, closeModal, setBookChange }) => {
                       >
                         <option value="">Select Author</option>
                         {authors.map((author, index) => (
-                          <option key={index} value={author.name}>
+                          <option key={index} value={author._id}>
                             {author.name}
                           </option>
                         ))}
