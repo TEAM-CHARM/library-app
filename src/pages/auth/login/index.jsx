@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import login from "../../../assets/images/login.svg"
+import login from "../../../assets/images/login2.svg"
 import googlelogo from "../../../assets/images/googlelogo.svg";
 import { useEffect, useState } from "react";
 // import { LoadingSpinner } from "../../components/Feedbacks";
@@ -7,6 +7,10 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
 // import { apiGetUser, apiLogin, generateToken } from "../../services/auth";
+import logo from "../../../assets/images/logo.png"
+import LoadingImg from '../../../assets/images/rolling.svg'
+import profilePic from "../../../assets/images/profile.jpg";
+
 
 const Login = () => {
   const navigate = useNavigate();
@@ -21,7 +25,6 @@ const Login = () => {
 
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
-    username: "",
     email: "",
     password: "",
   });
@@ -42,11 +45,6 @@ const Login = () => {
   const validate = () => {
     let isValid = true;
     const newErrors = {};
-
-    if (!formData.username) {
-      isValid = false;
-      newErrors.username = "Username is required";
-    }
 
     if (!formData.email) {
       isValid = false;
@@ -76,46 +74,60 @@ const Login = () => {
       // });
 
       // if (res.status === 200) {
-      //   const response = await apiGetUser(formData.username);
+        // const response = await apiGetUser(formData.username);
 
-      //   const user = await response.data.username;
+        // const user = await response.data.username;
+        let user;
+        if(formData.email==="albertnartey824@gmail.com"){
+          user={
+            firstname:"Albert",
+            lastname:"Nartey",
+            libraryname:"Govy's Library",
+            email:"albertnartey824@gmail.com",
+          }
+          const userInfo = {
+            // id: user.id,
+            // token: res2.data.accessToken,
+            firstName: user.firstname,
+            lastName: user.lastname,
+            libraryName: user.libraryname,
+            email: user.email,
+            role: "user",
+            profile: {
+              profilePicture:profilePic
+            },
+          };
+  
+          setTimeout(() => {
+            dispatch({
+              type: "LOGGED_IN_USER",
+              payload: userInfo,
+            });
+            window.localStorage.setItem("librariumUser", JSON.stringify(userInfo));
+            toast.success(`Welcome ${userInfo.firstName} ${userInfo.lastName}`);
+            navigate("/dashboard");
+            setLoading(false); 
+          }, 5000);
+        }else{
+          toast.error("Not a registered user")
+        }
 
-      //   const res2 = await generateToken({
-      //     email: user.email,
-      //     password: formData.password,
-      //   });
+        // const res2 = await generateToken({
+        //   email: user.email,
+        //   password: formData.password,
+        // });
 
-      //   console.log("Logged in user --->", response);
-      //   console.log("token--->", res2.data.accessToken);
-      //   const userInfo = {
-      //     id: user.id,
-      //     token: res2.data.accessToken,
-      //     firstName: user.firstname,
-      //     lastName: user.lastname,
-      //     username: user.username,
-      //     email: user.email,
-      //     role: "user",
-      //     profile: {
-      //       profilePicture:
-      //         "https://images.unsplash.com/photo-1621732560007-ac654b4b3b6a?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      //     },
-      //   };
-
-      //   dispatch({
-      //     type: "LOGGED_IN_USER",
-      //     payload: userInfo,
-      //   });
-
-      //   window.localStorage.setItem("portiUser", JSON.stringify(userInfo));
-      //   toast.success(`Welcome ${userInfo.firstName}`);
-      //   navigate("/dashboard");
+        // console.log("Logged in user --->", response);
+        // console.log("token--->", res2.data.accessToken);
+        
       // }
     } catch (error) {
       console.log(error);
       if (error.response.status === 401) toast.error("Invalid credentials");
       else toast.error("Sign in failed");
-    } finally {
       setLoading(false);
+    } finally {
+      
     }
   };
 
@@ -126,15 +138,24 @@ const Login = () => {
   return (
     <div className="grid grid-cols-5 h-screen">
       <div className="col-span-5 md:col-span-3 flex flex-col justify-center items-center p-5 gap-4 bg-[#F8F8FA]">
-        <h1 className="text-xl font-bold mb-2">
-          Porti<span className="text-blue-500">Builder</span>
-        </h1>
+      <div className="logo flex flex-col justify-center items-center gap-4">
+        <Link
+          to="/"
+          id="logo"
+          className="flex flex-col items-center align-middle justify-center"
+        >
+          <img src={logo} alt="Logo" width={70} />
+          <h2 className="text-lg font-semibold text-[#00B9BE]">
+            The Librarium
+          </h2>
+        </Link>
+      </div>
         <h2 className="text-4xl font-bold mb-6">Sign In</h2>
         <form
           onSubmit={handleSubmit}
           className="w-full flex flex-col gap-4 max-w-lg"
         >
-          <div className="mb-4 ">
+          {/* <div className="mb-4 ">
             <label
               className="block text-gray-700 text-sm font-semibold mb-2"
               htmlFor="username"
@@ -142,7 +163,7 @@ const Login = () => {
               USERNAME
             </label>
             <input
-              className={`shadow appearance-none rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+              className={`shadow appearance-none rounded-2xl w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
                 errors.username ? "border-red-500" : ""
               }`}
               id="username"
@@ -154,7 +175,7 @@ const Login = () => {
             {errors.username && (
               <p className="text-red-500 text-xs italic">{errors.username}</p>
             )}
-          </div>
+          </div> */}
 
           <div className="mb-4 ">
             <label
@@ -164,7 +185,7 @@ const Login = () => {
               EMAIL
             </label>
             <input
-              className={`shadow appearance-none rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+              className={`shadow appearance-none rounded-2xl w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
                 errors.email ? "border-red-500" : ""
               }`}
               id="email"
@@ -186,7 +207,7 @@ const Login = () => {
               PASSWORD
             </label>
             <input
-              className={`shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+              className={`shadow appearance-none rounded-2xl w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
                 errors.password ? "border-red-500" : ""
               }`}
               id="password"
@@ -208,14 +229,16 @@ const Login = () => {
 
           <div className="flex items-center justify-center mb-4 w-1/2 mx-auto">
             <button
-              className={`w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ${
+              className={`w-full flex items-center justify-center align-middle bg-primary-main hover:bg-primary-dark text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline ${
                 loading ? "bg-gray-300 hover:bg-gray-300" : ""
               }`}
               type="submit"
               disabled={loading}
             >
               {loading ? (
-                <LoadingSpinner height="25px" width="25px" />
+                // <LoadingSpinner height="25px" width="25px" />
+                <img src={LoadingImg} alt="loading..." height="30px" width="30px" />
+
               ) : (
                 "Sign In"
               )}
@@ -224,7 +247,7 @@ const Login = () => {
           <div className="text-center mb-4">OR</div>
           <div className="flex items-center justify-center w-1/2 mx-auto">
             <button
-              className="w-full flex justify-center gap-2 align-middle items-center hover:bg-red-700 hover:text-white text-gray-700 font-semibold py-2 px-4 border-2 rounded focus:outline-none focus:shadow-outline"
+              className="w-full flex justify-center gap-2 align-middle items-center hover:bg-red-700 hover:text-white text-gray-700 font-semibold py-2 px-4 border-2 rounded-full focus:outline-none focus:shadow-outline"
               type="button"
               onClick={handleLoginWithGoogle}
               disabled={loading}
@@ -235,7 +258,7 @@ const Login = () => {
           </div>
           <small className="text-center">
             New to PortiBuilder?{" "}
-            <Link className="text-blue-600" to="/signup">
+            <Link className="text-blue-600" to="/register">
               Sign Up
             </Link>
           </small>
@@ -243,11 +266,11 @@ const Login = () => {
       </div>
       <div
         className="hidden md:flex col-span-5 md:col-span-2 gap-4  flex-col justify-center items-center bg-cover bg-center p-8 relative"
-        style={{ backgroundImage: `url(${login})` }}
+        style={{ backgroundImage: `url(${login})`, backgroundPosition:"center", backgroundRepeat:'no-repeat', backgroundSize:"contain" }}
       >
-        <div className="absolute inset-0 bg-black opacity-50"></div>
+        {/* <div className="absolute inset-0 bg-black opacity-50"></div> */}
         {/* Overlay */}
-        <div className="relative z-10 flex flex-col items-center justify-center text-center">
+        {/* <div className="relative z-10 flex flex-col items-center justify-center text-center">
           <h2 className="text-white text-4xl font-bold mb-4">Welcome Back</h2>
           <p className="text-white mb-6 text-md">
             To keep connected, enter your details to login your account
@@ -258,7 +281,7 @@ const Login = () => {
           >
             Sign Up
           </Link>
-        </div>
+        </div> */}
       </div>
     </div>
   );

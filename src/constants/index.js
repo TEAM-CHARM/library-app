@@ -4,10 +4,16 @@ import { HiLibrary } from "react-icons/hi";
 import profile from "../assets/images/profile.jpg";
 
 const K = {
-  USER: {
-    name: "Albert Nartey",
-    profilePic: profile,
-    email: "albertnartey824@gmail.com",
+  USER:{
+    firstName: "Library",
+    lastName: "Owner",
+    libraryName: "Charm Library",
+    email: "user@librarium.com",
+    role: "user",
+    profile: {
+      profilePicture:
+        "https://images.unsplash.com/photo-1621732560007-ac654b4b3b6a?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    },
   },
   NAVLINKS: [
     { icon: HiLibrary, link: "My Library", path: "/dashboard" },
