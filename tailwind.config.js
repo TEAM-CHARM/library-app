@@ -17,7 +17,6 @@ export default {
           main: "red",
           light: "#00B9BE",
           dark: "",
-
         },
         background: {
           main: "#E3E3E3",

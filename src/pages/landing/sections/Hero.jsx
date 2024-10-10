@@ -1,43 +1,39 @@
 import React from 'react';
-import { BookOpen, Users, BarChart } from 'lucide-react'; // Ensure these are imported
-import backgroundImg from '../../../assets/images/librarium_bg.jpg'
+import { Typewriter } from 'react-simple-typewriter';
+import backgroundImg from '../../../assets/images/librarium_bg.jpg';
 
 const Hero = () => {
   return (
-    <>
-    <div
-      // className=" hero-container container h-[80vh] mx-auto px-4 py-16"
-
-      
-    className="relative w-full h-screen bg-cover bg-center" style={{ backgroundImage: `url('${backgroundImg}')` }}>
+    <div className="relative w-full h-screen bg-cover bg-center" style={{ backgroundImage: `url('${backgroundImg}')` }}>
       {/* Overlay for text or gradient */}
-      <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-       
-      </div>
-      </div>
-
-      <div className="flex flex-col md:flex-row items-center justify-between">
-        <div className="md:w-1/2 mb-8 md:mb-0">
-          {/* <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            Streamline Your Library Management
+      <div className="absolute inset-0 bg-black bg-opacity-10 flex items-start justify-start p-8 md:p-16 lg:p-24">
+        <div className="max-w-lg text-left mt-36">
+          {/* Catchy Message with Typewriter Effect */}
+          <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-purple-400 mb-4"> {/* Changed to text-purple-400 */}
+            <Typewriter
+              words={['Streamline Your Library Operations', 'Manage Books with Ease', 'Engage with Your Patrons Seamlessly']}
+              loop={true}
+              cursor
+              cursorStyle="_"
+              typeSpeed={70}
+              deleteSpeed={50}
+              delaySpeed={1000}
+            />
           </h1>
-          <p className="text-xl mb-6">
-            Efficient tools for cataloging, patron management, and insightful analytics to optimize your library operations.
+
+          {/* Subtitle */}
+          <p className="text-base md:text-lg lg:text-xl text-purple-300 mb-8"> {/* Changed to text-purple-300 */}
+            Simplify your library management with Librarium.
           </p>
-          <button className="bg-white text-green-600 font-bold py-2 px-4 rounded hover:bg-green-100 transition duration-300">
-            Start Free Trial
-          </button> */}
+
+          {/* Get Started Button */}
+          <button className="bg-purple-500 text-white px-6 py-3 rounded-lg shadow hover:bg-purple-600 transition duration-300">
+            Get Started
+          </button>
         </div>
-        {/* <div className="md:w-1/2 flex justify-center space-x-4">
-          <BookOpen size={80} />
-          <Users size={80} />
-          <BarChart size={80} />
-        </div> */}
-      </div> 
-    </>
+      </div>
+    </div>
   );
 };
 
 export default Hero;
-
-
