@@ -10,23 +10,22 @@ const PageHeader = ({
   buttonText,
   buttonIcon,
   onClick,
-  onChange
+  onChange,
 }) => {
+  const [user, setUser] = useState({});
 
-  const [user, setUser] = useState({})
-
-  const getUser = async()=>{
-    if(window.localStorage.getItem("librariumUser")){
-      setUser(JSON.parse(window.localStorage.getItem("librariumUser")))
-    }else{
-      setUser(K.USER)
+  const getUser = async () => {
+    if (window.localStorage.getItem("librariumUser")) {
+      setUser(JSON.parse(window.localStorage.getItem("librariumUser")));
+    } else {
+      setUser(K.USER);
     }
-  }
+  };
 
   useEffect(() => {
-    getUser()
-  }, [])
-  
+    getUser();
+  }, []);
+
   return (
     <div className="mb-10">
       <div className="flex align-middle mb-4 justify-between items-center">
@@ -41,7 +40,9 @@ const PageHeader = ({
             />
           </div> */}
           <div className="profile-info flex flex-col w-full ">
-            <p className="text-gray-700 font-bold text-lg">{user.libraryName}</p>
+            <p className="text-gray-700 font-bold text-lg">
+              {user.libraryName}
+            </p>
           </div>
         </div>
       </div>
