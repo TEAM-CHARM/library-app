@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FaBook, FaBars, FaTimes } from 'react-icons/fa';
 import logo from '../../../assets/images/logo.png';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,12 +18,13 @@ const Navbar = () => {
             <img src={logo} className='mr-2 w-12' alt="Logo" />
             <span className="font-bold text-xl text-white">The Librarium</span>
           </div>
-          <div className="hidden md:flex space-x-4">
+          <div className="hidden md:flex align-middle items-center space-x-4">
             <a href="#home-section" className="text-white hover:text-secondary-light">Home</a>
             <a href="#feature-section" className="text-white hover:text-secondary-light">Features</a>
             <a href="#pricing-section" className="text-white hover:text-secondary-light">Pricing</a>
             <a href="#testimonial-section" className="text-white hover:text-secondary-light">Testimonials</a>
             <a href="#contact-section" className="text-white hover:text-secondary-light">Contact</a>
+            <Link to="/register" className='border-2 border-primary-main rounded-full px-4 py-2 text-white hover:bg-primary-main '>Get Started</Link>
           </div>
           <div className="md:hidden">
             <button onClick={toggleMenu}>
