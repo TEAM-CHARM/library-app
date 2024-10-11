@@ -167,7 +167,7 @@ const AddOrEditBook = ({ authors, open, book, closeModal, fetchData }) => {
                       </label>
                       <select
                         name="author"
-                        value={formData.author}
+                        value={formData?.author?._id} // This should match the author's _id
                         onChange={handleChange}
                         className={`${inputStyle}`}
                         required
