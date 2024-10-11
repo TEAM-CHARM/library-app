@@ -2,7 +2,7 @@
 
 **Librarium** is a comprehensive library management application designed to streamline the organization, tracking, and administration of library resources. Whether you're managing a public library, a school library, or a personal collection, Librarium offers robust features to enhance efficiency and user experience.
 
-![Librarium Logo](./src/assets/images/logo.png)
+![Librarium Logo](./public/android-chrome-192x192.png)
 
 ## Table of Contents
 
