@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { apiGetBook } from "../../../services/book";
+import { apiDeleteBook, apiGetBook } from "../../../services/book";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import PrimaryButton from "../components/PrimaryButton";
@@ -57,6 +57,20 @@ const BookDetails = () => {
   useEffect(() => {
     fetchData();
   }, [id]);
+
+  const handleDelete = async () => {
+    try {
+      setLoading(true);
+      
+      await apiDeleteBook(book._id);
+      navigate('/dashboard/books')
+      toast.success("Book deleted successfully");
+    } catch (error) {
+      toast.error("Error deleting book!");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <>
@@ -121,6 +135,8 @@ const BookDetails = () => {
                   </p>
                 </div>
               </div>
+              <div className="flex justify-end pt-10">
+              <button className=" font-semibold text-red-400 text-sm hover:text-red-700" onClick={handleDelete}>Delete Book</button></div>
             </div>
           </div>
         </div>
