@@ -145,7 +145,7 @@ const Books = () => {
         onChange={handleSearch} // Attach the debounced search handler
       />
 
-      <div className="flex justify-end align-middle items-center pr-10 mb-8">
+      <div className="flex justify-end align-middle items-center pr-10 mb-8 ">
         <div className="bg-white flex rounded-3xl ">
           <button
             className={`p-4 py-2 border-r flex align-middle items-center rounded-l-3xl gap-2 ${
@@ -181,7 +181,7 @@ const Books = () => {
           />
         )
       ) : (
-        <div className="grid grid-cols-4 gap-10 px-16">
+        <div className="grid grid-cols-4 gap-10 p-16 overflow-hidden">
           {books?.map((book, index) => (
             <div key={index}>
               <Link to={book._id}>
