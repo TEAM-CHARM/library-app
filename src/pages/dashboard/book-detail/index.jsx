@@ -61,9 +61,9 @@ const BookDetails = () => {
   const handleDelete = async () => {
     try {
       setLoading(true);
-      
+
       await apiDeleteBook(book._id);
-      navigate('/dashboard/books')
+      navigate("/dashboard/books");
       toast.success("Book deleted successfully");
     } catch (error) {
       toast.error("Error deleting book!");
@@ -136,7 +136,20 @@ const BookDetails = () => {
                 </div>
               </div>
               <div className="flex justify-end pt-10">
-              <button className=" font-semibold text-red-400 text-sm hover:text-red-700" onClick={handleDelete}>Delete Book</button></div>
+                <button
+                  className=" font-semibold text-red-400 text-sm hover:text-red-700"
+                  onClick={() => {
+                    if (
+                      window.confirm(
+                        `Are you sure you want to delete this book(${book.title})`
+                      )
+                    )
+                      handleDelete();
+                  }}
+                >
+                  Delete Book
+                </button>
+              </div>
             </div>
           </div>
         </div>
