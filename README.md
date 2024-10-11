@@ -2,7 +2,7 @@
 
 **Librarium** is a comprehensive library management application designed to streamline the organization, tracking, and administration of library resources. Whether you're managing a public library, a school library, or a personal collection, Librarium offers robust features to enhance efficiency and user experience.
 
-![Librarium Logo](./assets/logo.png)
+![Librarium Logo](./src/assets/images/logo.png)
 
 ## Table of Contents
 
@@ -55,9 +55,9 @@
 
 ## Demo
 
-You can access a live demo of Librarium [here](https://librarium-demo.com).
+You can access a live demo of Librarium [here](https://library-app-coral-six.vercel.app).
 
-![Librarium Demo](./assets/demo-screenshot.png)
+![Librarium Demo](./src/assets/images/screenshot.png)
 
 ## Technologies Used
 
@@ -74,9 +74,6 @@ You can access a live demo of Librarium [here](https://librarium-demo.com).
 
 - **Authentication:**
   - [JWT (JSON Web Tokens)](https://jwt.io/) - Secure user authentication.
-
-- **APIs:**
-  - [RapidAPI](https://rapidapi.com/) - API marketplace for integrating additional features.
 
 - **Tools & Utilities:**
   - [ESLint](https://eslint.org/) - Linting tool for maintaining code quality.
@@ -95,5 +92,5 @@ You can access a live demo of Librarium [here](https://librarium-demo.com).
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/librarium.git
+git clone https://github.com/TEAM-CHARM/library-app.git
 cd librarium
