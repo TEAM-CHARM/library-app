@@ -1,7 +1,9 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, ScrollRestoration } from "react-router-dom";
 
 const RootLayout = () => {
-  return <Outlet />;
+  return <>
+  <ScrollRestoration />
+  <Outlet /></>;
 };
 
 export default RootLayout;
