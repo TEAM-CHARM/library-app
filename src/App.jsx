@@ -73,9 +73,9 @@ function App() {
       element: <RootLayout />,
       children: [
         { index: true, element: <Landing /> },
-        { path: "/login", element: <Login /> },
-        { path: "/forgot-password", element: <ForgotPassword /> },
-        { path: "/register", element: <Register /> },
+        { path: "login", element: <Login /> },
+        { path: "forgot-password", element: <ForgotPassword /> },
+        { path: "register", element: <Register /> },
       ],
     },
 
@@ -88,9 +88,9 @@ function App() {
       ),
       children: [
         { index: true, element: <Dashboard /> },
-        { path: "/dashboard/books", element: <Books /> },
-        { path: "/dashboard/books/:id", element: <BookDetails /> },
-        { path: "/dashboard/members", element: <Members /> },
+        { path: "books", element: <Books /> },
+        { path: "books/:id", element: <BookDetails /> },
+        { path: "members", element: <Members /> },
       ],
     },
     { path: "*", element: <NotFound /> },
