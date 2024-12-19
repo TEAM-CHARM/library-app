@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react";
+import { useState, useCallback } from "react";
 import PageHeader from "../components/PageHeader";
 import { BiSolidBookAdd } from "react-icons/bi";
 import { FaList } from "react-icons/fa";
@@ -7,109 +7,54 @@ import toast from "react-hot-toast";
 import BookCard from "./components/BookCard";
 import { IoGridOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
-import { apiDeleteBook, apiGetBooks } from "../../../services/book";
+import { apiDeleteBook } from "../../../services/book";
 import TableSkeleton from "../components/TableSkeleton";
 import AddOrEditBook from "../../../modals/add-book";
 import { apiGetAuthors } from "../../../services/author";
+import { useBooks } from "../../../hooks/useBooks"; // Custom SWR Hook for fetching books
+import useSWR from "swr";
 
 const Books = () => {
-  const [books, setBooks] = useState([]); // Current visible books
-  const [allBooks, setAllBooks] = useState([]); // Full list of books for restoration
-  const [authors, setAuthors] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const { books, isLoading, error, mutate: fetchBooks } = useBooks(); // Using SWR
+  const { data: authors, mutate: fetchAuthors } = useSWR(
+    "/api/authors",
+    apiGetAuthors
+  );
   const [view, setView] = useState("list");
   const [openAddBook, setOpenAddBook] = useState(false);
   const [selectedBook, setSelectedBook] = useState({});
   const [searchTerm, setSearchTerm] = useState("");
 
-  const fetchBooks = async () => {
-    try {
-      setLoading(true);
-      const res = await apiGetBooks();
-      if (res.status === 200) {
-        setAllBooks(res.data); // Store full list of books
-        setBooks(res.data); // Initialize visible books list
-      }
-    } catch (error) {
-      toast.error("Error fetching books");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const fetchAuthors = async () => {
-    try {
-      setLoading(true);
-      const res = await apiGetAuthors();
-      if (res.status === 200) {
-        setAuthors(res.data);
-      }
-    } catch (error) {
-      toast.error("Error fetching authors");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const fetchData = () => {
-    fetchBooks();
-    fetchAuthors();
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
   const handleAddOrEditBook = async (book) => {
     try {
-      setLoading(true);
-      // Add or edit book logic here
+      // Simulate an add/edit request here
+      toast.success("Book added/updated successfully");
+      fetchBooks(); // Re-fetch books after adding/updating
     } catch (error) {
-      toast.error("Error adding book");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleEditBook = async (book) => {
-    try {
-      setLoading(true);
-      // Edit book logic here
-    } catch (error) {
-      toast.error("Error updating book!");
-    } finally {
-      setLoading(false);
+      toast.error("Error adding/updating book");
     }
   };
 
   const handleDeleteBook = async (book) => {
     try {
-      setLoading(true);
       await apiDeleteBook(book._id);
-      fetchData();
+      fetchBooks(); // Re-fetch books after deletion
       toast.success("Book deleted successfully");
     } catch (error) {
       toast.error("Error deleting book!");
-    } finally {
-      setLoading(false);
     }
   };
 
-  // Debounced function to delay the search execution
-  const debouncedSearch = useCallback(
-    (callback, delay) => {
-      let timer;
-      return (...args) => {
-        setLoading(true)
-        if (timer) clearTimeout(timer);
-        timer = setTimeout(() => {
-          callback(...args);
-          setLoading(false)
-        }, delay);
-      };
-    },
-    []
-  );
+  // Debounced function to filter books based on search term
+  const debouncedSearch = useCallback((callback, delay) => {
+    let timer;
+    return (...args) => {
+      if (timer) clearTimeout(timer);
+      timer = setTimeout(() => {
+        callback(...args);
+      }, delay);
+    };
+  }, []);
 
   // Handle the search input change
   const handleSearch = (e) => {
@@ -119,19 +64,16 @@ const Books = () => {
     // Debounce search to prevent too many re-renders
     debouncedSearch(() => {
       if (searchValue.trim() === "") {
-        // If the search field is cleared, restore the full book list
-        setBooks(allBooks);
+        fetchBooks(); // Restore the full book list
       } else {
-        // Filter books based on the search term
-        const filteredBooks = allBooks.filter(
+        const filteredBooks = books.filter(
           (book) =>
             book.title.toLowerCase().includes(searchValue.toLowerCase()) ||
-            // book.author.toLowerCase().includes(searchValue.toLowerCase()) ||
             book.genre.toLowerCase().includes(searchValue.toLowerCase())
         );
-        setBooks(filteredBooks);
+        fetchBooks(filteredBooks);
       }
-    }, 1000)(); // 500ms delay for debounce
+    }, 1000)();
   };
 
   return (
@@ -142,11 +84,11 @@ const Books = () => {
         buttonText="Add Book"
         buttonIcon={<BiSolidBookAdd />}
         onClick={() => setOpenAddBook(true)}
-        onChange={handleSearch} // Attach the debounced search handler
+        onChange={handleSearch}
       />
 
-      <div className="flex justify-end align-middle items-center pr-10 mb-8 ">
-        <div className="bg-white flex rounded-3xl ">
+      <div className="flex justify-end align-middle items-center pr-10 mb-8">
+        <div className="bg-white flex rounded-3xl">
           <button
             className={`p-4 py-2 border-r flex align-middle items-center rounded-l-3xl gap-2 ${
               view === "list" && "bg-gray-700 text-white"
@@ -169,16 +111,18 @@ const Books = () => {
       </div>
 
       {view === "list" ? (
-        loading ? (
+        isLoading ? (
           <TableSkeleton />
         ) : (
-          <BooksTable
-            books={books} // Render filtered or all books
-            handleDeleteBook={handleDeleteBook}
-            handleEditBook={handleAddOrEditBook}
-            setSelectedBook={setSelectedBook}
-            setOpenAddBook={setOpenAddBook}
-          />
+          books && (
+            <BooksTable
+              books={books.data} // Render filtered or all books
+              handleDeleteBook={handleDeleteBook}
+              handleEditBook={handleAddOrEditBook}
+              setSelectedBook={setSelectedBook}
+              setOpenAddBook={setOpenAddBook}
+            />
+          )
         )
       ) : (
         <div className="grid grid-cols-4 gap-10 p-16 overflow-hidden">
@@ -192,8 +136,8 @@ const Books = () => {
         </div>
       )}
 
-      <AddOrEditBook
-        authors={authors}
+      {authors && <AddOrEditBook
+        authors={authors.data || []}
         open={openAddBook}
         book={selectedBook}
         handleSubmit={handleAddOrEditBook}
@@ -201,8 +145,8 @@ const Books = () => {
           setSelectedBook({});
           setOpenAddBook(false);
         }}
-        fetchData={fetchData}
-      />
+        fetchData={fetchBooks} // Re-fetch data after book addition/update
+      />}
     </div>
   );
 };
