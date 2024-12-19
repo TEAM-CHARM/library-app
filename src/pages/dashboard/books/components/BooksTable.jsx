@@ -4,7 +4,13 @@ import { MdEdit, MdDelete } from "react-icons/md";
 import { Link } from "react-router-dom";
 import ConfirmDelete from "../../../../modals/confirm-delete";
 
-const BooksTable = ({  books, handleDeleteBook, handleEditBook, setSelectedBook, setOpenAddBook }) => {
+const BooksTable = ({
+  books,
+  handleDeleteBook,
+  handleEditBook,
+  setSelectedBook,
+  setOpenAddBook,
+}) => {
   // const [selectedBook ,setSelectedBook] = useState({})
   const [currentPage, setCurrentPage] = useState(1); // Current page number
   const booksPerPage = 10; // Books per page
@@ -43,7 +49,7 @@ const BooksTable = ({  books, handleDeleteBook, handleEditBook, setSelectedBook,
           </tr>
         </thead>
         <tbody>
-          {currentBooks.map((book, index) => (
+          {currentBooks?.map((book, index) => (
             <tr
               key={index}
               className={`border-t ${
@@ -79,17 +85,23 @@ const BooksTable = ({  books, handleDeleteBook, handleEditBook, setSelectedBook,
                 <button
                   className="text-blue-500 hover:underline"
                   onClick={() => {
-                    setSelectedBook(book)
+                    setSelectedBook(book);
                     console.log("selected book -", book);
-                    setOpenAddBook(true)
-                  } }
+                    setOpenAddBook(true);
+                  }}
                 >
                   <MdEdit size={25} />
                 </button>
                 <button
                   className="text-red-500 hover:underline"
                   onClick={() => {
-                    if(window.confirm(`Are you sure you want to delete this book(${book.title})`))handleDeleteBook(book)}}
+                    if (
+                      window.confirm(
+                        `Are you sure you want to delete this book(${book.title})`
+                      )
+                    )
+                      handleDeleteBook(book);
+                  }}
                 >
                   <MdDelete size={25} />
                 </button>
